@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap');
+:root {
+  --clr-primary: hsl(220, 98%, 61%);
+  --clr-bg: linear-gradient(to left, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  /* light */
+  --clr-light-1: hsl(0, 0%, 98%);
+  --clr-light-2: hsl(236, 33%, 92%);
+  --clr-light-3: hsl(233, 11%, 84%);
+  --clr-light-4: hsl(236, 9%, 61%);
+  --clr-light-5: hsl(235, 19%, 35%);
+  /* Dark */
+  --clr-dark-1: hsl(235, 21%, 11%);
+  --clr-dark-2: hsl(235, 24%, 19%);
+  --clr-dark-3: hsl(234, 39%, 85%);
+  --clr-dark-4: hsl(236, 33%, 92%);
+  --clr-dark-5: hsl(234, 11%, 52%);
+  --clr-dark-6: hsl(233, 14%, 35%);
+  --clr-dark-7: hsl(237, 14%, 26%);
+}
+.light {
+  --bg-url: url('./images/bg-mobile-light.jpg');
+  --bg-theme: url('./images/icon-moon.svg');
+  --bg-primary: hsl(236, 33%, 92%);
+  --bg-input: hsl(0, 0%, 98%);
+  --clr-input: hsl(236, 9%, 61%);
+  --bg-check: hsl(233, 11%, 84%);
+  --bg-delete: hsl(235, 19%, 35%);
+}
+.dark {
+  --bg-url: url('./images/bg-mobile-dark.jpg');
+  --bg-theme: url('./images/icon-sun.svg');
+  --bg-primary: hsl(235, 21%, 11%);
+  --bg-input: hsl(235, 24%, 19%);
+  --clr-input: hsl(234, 39%, 85%);
+  --bg-check: hsl(234, 39%, 85%);
+  --bg-delete: hsl(233, 14%, 35%);
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font: 18px 'Josefin Sans', sans-serif;
+  background: var(--bg-url) no-repeat center top, var(--bg-primary);
+  background-size: contain;
+  height: 100vh;
+}
+.container {
+  position: relative;
+  top: 8%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 92%;
+}
+header {
+  position: relative;
+}
+header h1 {
+  color: #ffffff;
+  letter-spacing: 0.7ch;
+  font-weight: 700;
+  font-family: inherit;
+}
+i#theme {
+  position: absolute;
+  content: var(--bg-theme);
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+form {
+  position: relative;
+  margin-top: 1.5rem;
+}
+form input#todo {
+  border-radius: 0.2rem;
+}
+ul.todo-ul {
+  border-radius: 0.2rem;
+  max-height: 70%;
+  height: auto;
+  width: 100%;
+  list-style: none;
+  margin-top: 1.5rem;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--clr-light-5) var(--clr-light-4);
+}
+ul.todo-ul::-webkit-scrollbar {
+  width: 0.4rem;
+}
+ul.todo-ul::-webkit-scrollbar-track {
+  background: var(--clr-light-4);
+}
+ul.todo-ul::-webkit-scrollbar-thumb {
+  background-color: var(--clr-light-5);
+}
+input#todo,
+li.todo-li {
+  width: 100%;
+  background: var(--bg-input);
+  outline: none;
+  min-height: 3rem;
+  border: none;
+  padding-left: 3rem;
+  font-family: inherit;
+}
+li.todo-li {
+  position: relative;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: var(--clr-input);
+}
+li.todo-li p {
+  color: var(--clr-input);
+  padding: 1rem 0;
+}
+li.todo-li.checked p {
+  text-decoration: line-through;
+}
+li.todo-li.checked button.check {
+  background: var(--clr-bg);
+}
+li.todo-li button.check svg {
+  visibility: hidden;
+  opacity: 0;
+}
+li.todo-li.checked button.check svg {
+  visibility: visible;
+  opacity: 1;
+}
+input#todo {
+  font-size: 1rem;
+  color: var(--clr-input);
+}
+form::before,
+button.check,
+button.delete {
+  position: absolute;
+  content: '';
+  background: transparent;
+  outline: none;
+}
+
+form::before,
+button.check {
+  width: 1rem;
+  height: 1rem;
+  top: 1rem;
+  left: 1rem;
+  border: 1px solid var(--bg-check);
+  border-radius: 50%;
+}
+button.delete {
+  position: absolute;
+  content: '';
+  width: 3rem;
+  height: 100%;
+  top: 0;
+  right: 0;
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+button.check,
+button.delete {
+  cursor: pointer;
+}
+button.check svg,
+button.delete svg {
+  pointer-events: none;
+}
+li.todo-li::before,
+li.todo-li::after {
+  cursor: pointer;
+}
+
+li.todo-li:first-child {
+  border-top: none;
+}
+.attribution {
+  font-size: 11px;
+  text-align: center;
+}
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
+@media (min-width: 568px) {
+  .light {
+    --bg-url: url('./images/bg-desktop-light.jpg');
+  }
+  .dark {
+    --bg-url: url('./images/bg-desktop-dark.jpg');
+  }
+  .container {
+    width: 40%;
+    min-width: 528px;
+  }
+}
