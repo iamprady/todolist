@@ -35,8 +35,9 @@ window.addEventListener('DOMContentLoaded', () => {
       btn2.innerHTML = crossSvg
       li.appendChild(btn2)
       li.setAttribute('id', todo.id)
+      li.setAttribute('draggable', true)
       if (todo.checked) li.classList.add('checked')
-      li.addEventListener('click', changeStateOfTodo)
+      addListeners(li)
       todoList.appendChild(li)
     })
   }
@@ -62,14 +63,24 @@ form.addEventListener('submit', (e) => {
   li.appendChild(btn2)
   let tmpuuid = uuid()
   li.setAttribute('id', tmpuuid)
+  li.setAttribute('draggable', true)
   let todoObj = { id: tmpuuid, text: input.value, checked: false }
   todos.unshift(todoObj)
   localStorage.setItem('todos', JSON.stringify(todos))
-  li.addEventListener('click', changeStateOfTodo)
+  addListeners(li)
   todoList.insertBefore(li, todoList.children[0])
   input.value = ''
 })
-
+todoList.addEventListener('dragover', (e) => {
+  e.preventDefault()
+  const afterElement = getDragAfterElement(e.clientY)
+  const dragging = document.querySelector('.dragging')
+  if (afterElement === null) {
+    todoList.appendChild(dragging)
+  } else {
+    todoList.insertBefore(dragging, afterElement)
+  }
+})
 function setTheme() {
   localStorage.setItem('theme', theme)
   document.documentElement.className = theme
@@ -142,4 +153,44 @@ function changeStateOfTodo(e) {
     todos = todos.filter((todo) => todo.id !== todoId)
     localStorage.setItem('todos', JSON.stringify(todos))
   } else return
+}
+function addListeners(element) {
+  element.addEventListener('click', changeStateOfTodo)
+  element.addEventListener('dragstart', () => {
+    element.classList.add('dragging')
+  })
+  element.addEventListener('dragend', () => {
+    const id = element.getAttribute('id')
+    let todoData = todos.find((todo) => todo.id === id)
+    todos = todos.filter((todo) => todo.id !== id)
+    let newIndex
+    console.log([...element.parentElement.children])
+    ;[...element.parentElement.children].find((item, index) => {
+      if (item.id === id) {
+        newIndex = index
+        return true
+      }
+      return false
+    })
+    todos.splice(newIndex, 0, todoData)
+    localStorage.setItem('todos', JSON.stringify(todos))
+    element.classList.remove('dragging')
+  })
+}
+function getDragAfterElement(y) {
+  const draggableElements = [
+    ...container.querySelectorAll('.todo-li:not(.dragging)'),
+  ]
+  return draggableElements.reduce(
+    (closest, child) => {
+      const box = child.getBoundingClientRect()
+      const offset = y - box.top - box.height / 2
+      if (offset < 0 && offset > closest.offset) {
+        return { offset, element: child }
+      } else {
+        return closest
+      }
+    },
+    { offset: Number.NEGATIVE_INFINITY }
+  ).element
 }

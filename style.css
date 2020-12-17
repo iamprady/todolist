@@ -115,6 +115,7 @@ li.todo-li {
   border-top-width: 1px;
   border-top-style: solid;
   border-top-color: var(--clr-input);
+  cursor: grabbing;
 }
 li.todo-li p {
   color: var(--clr-input);
