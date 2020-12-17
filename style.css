@@ -213,7 +213,7 @@ div.todo-info {
   margin-left: 1em;
 }
 p.draganddrop {
-  margin: 2rem 0;
+  margin: 5.25rem 0;
   text-align: center;
   font-size: 0.85em;
   color: var(--clr-input);
@@ -252,5 +252,8 @@ footer {
   .container {
     width: 40%;
     min-width: 528px;
+  }
+  p.draganddrop {
+    margin: 2rem 0;
   }
 }
