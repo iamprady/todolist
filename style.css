@@ -92,6 +92,9 @@ form {
 }
 form input#todo {
   border-radius: 0.2rem;
+  font-size: 1rem;
+  color: var(--clr-input);
+  padding-right: 3rem;
 }
 ul.todo-ul {
   border-radius: 0.2rem 0.2rem 0 0;
@@ -139,10 +142,6 @@ li.todo-li button.check svg {
 li.todo-li.checked button.check svg {
   visibility: visible;
   opacity: 1;
-}
-input#todo {
-  font-size: 1rem;
-  color: var(--clr-input);
 }
 form::before,
 button.check,
