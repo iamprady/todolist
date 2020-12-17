@@ -3,35 +3,53 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- displays site properly based on user's device -->
-
     <link
       rel="icon"
       type="image/png"
       sizes="32x32"
       href="./images/favicon-32x32.png"
     />
-
-    <title>Frontend Mentor | Todo app</title>
+    <title>Make ToDoS</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
+    <div class="container w-100">
       <header>
         <h1>TODO</h1>
         <i id="theme"></i>
       </header>
       <form id="todo-form">
-        <input type="text" name="todo" id="todo" />
+        <input
+          type="text"
+          name="todo"
+          id="todo"
+          placeholder="Create a new todo..."
+        />
       </form>
-      <ul class="todo-ul"></ul>
-      <!-- <div class="attribution">
-        Challenge by
-        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
-          >Frontend Mentor</a
-        >. Coded by <a href="#">Your Name Here</a>.
-      </div> -->
+      <ul class="todo-ul w-100"></ul>
+      <div class="todo-info flex">
+        <div class="items-left">
+          <p>0 items left</p>
+        </div>
+        <div class="todo-classify flex">
+          <p id="all" class="active">All</p>
+          <p id="active">Active</p>
+          <p id="completed">Completed</p>
+        </div>
+        <div class="clear">
+          <p>clear selection</p>
+        </div>
+      </div>
+      <p class="draganddrop">Drag and Drop to reorder list</p>
     </div>
+    <footer>
+      <div class="attribution">
+        Challenge by
+        <a href="https://www.frontendmentor.io" target="_blank"
+          >Frontend Mentor</a
+        >. Coded by <a href="#">Pradeep S</a>.
+      </div>
+    </footer>
     <script src="script.js"></script>
   </body>
 </html>
