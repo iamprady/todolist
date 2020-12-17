@@ -94,7 +94,6 @@ form input#todo {
   border-radius: 0.2rem;
   font-size: 1rem;
   color: var(--clr-input);
-  padding-right: 3rem;
 }
 ul.todo-ul {
   border-radius: 0.2rem 0.2rem 0 0;
@@ -110,7 +109,7 @@ div.todo-info {
   outline: none;
   min-height: 3rem;
   border: none;
-  padding-left: 3rem;
+  padding: 0 3rem;
   font-family: inherit;
 }
 input#todo::placeholder {
