@@ -59,6 +59,7 @@ form.addEventListener('submit', (e) => {
   li.classList.add('todo-li')
   let btn1 = document.createElement('button')
   btn1.classList.add('check')
+  btn1.setAttribute('aria-label', 'mark completed')
   btn1.innerHTML = checkSvg
   li.appendChild(btn1)
   let todo = document.createElement('p')
@@ -66,6 +67,7 @@ form.addEventListener('submit', (e) => {
   li.appendChild(todo)
   let btn2 = document.createElement('button')
   btn2.classList.add('delete')
+  btn2.setAttribute('aria-label', 'delete todo')
   btn2.innerHTML = crossSvg
   li.appendChild(btn2)
   let tmpuuid = uuid()
@@ -218,15 +220,23 @@ function addListeners(element) {
   element.addEventListener('dragstart', () => {
     element.classList.add('dragging')
   })
-  element.addEventListener('touchstart', () => {
-    let dragEvent = new DragEvent('dragstart')
-    element.dispatchEvent(dragEvent)
-  })
-  element.addEventListener('touchmove', (e) => {
-    const touchInfo = e.targetTouches[0]
-    let dragEvent = new DragEvent('dragover', { clientY: touchInfo.clientY })
-    todoList.dispatchEvent(dragEvent)
-  })
+  element.addEventListener(
+    'touchstart',
+    () => {
+      let dragEvent = new DragEvent('dragstart')
+      element.dispatchEvent(dragEvent)
+    },
+    { passive: true }
+  )
+  element.addEventListener(
+    'touchmove',
+    (e) => {
+      const touchInfo = e.targetTouches[0]
+      let dragEvent = new DragEvent('dragover', { clientY: touchInfo.clientY })
+      todoList.dispatchEvent(dragEvent)
+    },
+    { passive: true }
+  )
   element.addEventListener('touchend', () => {
     let dragEvent = new DragEvent('dragend')
     element.dispatchEvent(dragEvent)
@@ -271,6 +281,7 @@ function seed() {
     li.classList.add('todo-li')
     let btn1 = document.createElement('button')
     btn1.classList.add('check')
+    btn1.setAttribute('aria-label', 'mark completed')
     btn1.innerHTML = checkSvg
     li.appendChild(btn1)
     let todoText = document.createElement('p')
@@ -278,6 +289,7 @@ function seed() {
     li.appendChild(todoText)
     let btn2 = document.createElement('button')
     btn2.classList.add('delete')
+    btn2.setAttribute('aria-label', 'delete todo')
     btn2.innerHTML = crossSvg
     li.appendChild(btn2)
     li.setAttribute('id', todo.id)
