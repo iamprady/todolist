@@ -2,6 +2,17 @@ importScripts(
   'https://cdnjs.cloudflare.com/ajax/libs/workbox-sw/5.1.4/workbox-sw.min.js'
 )
 workbox.routing.registerRoute(
+  ({ request }) => request.mode === 'navigate',
+  new workbox.strategies.NetworkFirst({
+    cacheName: 'pages',
+    plugins: [
+      new workbox.cacheableResponse.CacheableResponsePlugin({
+        statuses: [200],
+      }),
+    ],
+  })
+)
+workbox.routing.registerRoute(
   ({ url }) =>
     url.origin === 'https://fonts.googleapis.com' ||
     url.origin === 'https://fonts.gstatic.com',
@@ -12,17 +23,29 @@ workbox.routing.registerRoute(
 )
 workbox.routing.registerRoute(
   ({ request }) =>
-    request.destination === 'script' || request.destination === 'style',
-  new workbox.strategies.StaleWhileRevalidate()
+    request.destination === 'style' ||
+    request.destination === 'script' ||
+    request.destination === 'worker',
+  new workbox.strategies.StaleWhileRevalidate({
+    cacheName: 'assets',
+    plugins: [
+      new workbox.cacheableResponse.CacheableResponsePlugin({
+        statuses: [200],
+      }),
+    ],
+  })
 )
 workbox.routing.registerRoute(
   ({ request }) => request.destination === 'image',
   new workbox.strategies.CacheFirst({
     cacheName: 'images',
     plugins: [
+      new workbox.cacheableResponse.CacheableResponsePlugin({
+        statuses: [200],
+      }),
       new workbox.expiration.ExpirationPlugin({
-        maxEntries: 60,
-        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
+        maxEntries: 50,
+        maxAgeSeconds: 60 * 60 * 24 * 30,
       }),
     ],
   })
