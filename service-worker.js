@@ -1,6 +1,7 @@
 importScripts(
   'https://cdnjs.cloudflare.com/ajax/libs/workbox-sw/5.1.4/workbox-sw.min.js'
 )
+workbox.precaching.precacheAndRoute(self.__WB_MANIFEST)
 workbox.routing.registerRoute(
   ({ request }) => request.mode === 'navigate',
   new workbox.strategies.NetworkFirst({
@@ -50,3 +51,10 @@ workbox.routing.registerRoute(
     ],
   })
 )
+workbox.routing.setCatchHandler(async ({ event }) => {
+  if (event.request.destination === 'document') {
+    return workbox.precaching.matchPrecache('/index.html')
+  }
+
+  return Response.error()
+})
