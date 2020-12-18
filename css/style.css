@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap");
 :root {
   --clr-primary: hsl(220, 98%, 61%);
   --bg-check: linear-gradient(to left, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
 }
+
 .light {
-  --bg-url: url('./images/bg-mobile-light.jpg');
-  --bg-theme: url('./images/icon-moon.svg');
+  --bg-url: url('../images/bg-mobile-light.jpg');
+  --bg-theme: url('../images/icon-moon.svg');
   --bg-primary: hsl(236, 33%, 92%);
   --bg-input: hsl(0, 0%, 98%);
   --clr-input: hsl(236, 9%, 61%);
@@ -15,9 +16,10 @@
   --clr-fill: hsl(235, 19%, 35%);
   --border-check: hsl(233, 11%, 84%);
 }
+
 .dark {
-  --bg-url: url('./images/bg-mobile-dark.jpg');
-  --bg-theme: url('./images/icon-sun.svg');
+  --bg-url: url('../images/bg-mobile-dark.jpg');
+  --bg-theme: url('../images/icon-sun.svg');
   --bg-primary: hsl(235, 21%, 11%);
   --bg-input: hsl(235, 24%, 19%);
   --clr-input: hsl(234, 11%, 52%);
@@ -27,13 +29,16 @@
   --clr-fill: hsl(234, 39%, 85%);
   --border-check: hsl(234, 39%, 85%);
 }
+
 *,
 *::before,
 *::after {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
+
 body {
   position: relative;
   font: 18px 'Josefin Sans', sans-serif;
@@ -45,56 +50,74 @@ body {
   scrollbar-width: thin;
   scrollbar-color: var(--clr-light-5) var(--clr-light-4);
 }
+
 body::-webkit-scrollbar {
   width: 0.4rem;
 }
+
 body::-webkit-scrollbar-track {
   background: var(--clr-light-4);
 }
+
 body::-webkit-scrollbar-thumb {
   background-color: var(--clr-light-5);
 }
+
 .container {
   margin: 0 auto;
   padding: 0 1.5rem;
 }
+
 .flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
+
 .w-100 {
   width: 100%;
 }
+
 .hide {
   display: none;
 }
+
 header,
 form,
 li.todo-li {
   position: relative;
 }
+
 header h1 {
   color: #ffffff;
   letter-spacing: 0.7ch;
   font-weight: 700;
   font-family: inherit;
 }
+
 i#theme {
   position: absolute;
   content: var(--bg-theme);
   top: 50%;
   right: 0;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   cursor: pointer;
 }
+
 form {
   margin-top: 1.5rem;
 }
+
 form input#todo {
   border-radius: 0.2rem;
   font-size: 1rem;
   color: var(--clr-input);
 }
+
 ul.todo-ul {
   border-radius: 0.2rem 0.2rem 0 0;
   list-style: none;
@@ -112,36 +135,58 @@ div.todo-info {
   padding: 0 3rem;
   font-family: inherit;
 }
+
+input#todo::-webkit-input-placeholder {
+  color: var(--clr-input);
+}
+
+input#todo:-ms-input-placeholder {
+  color: var(--clr-input);
+}
+
+input#todo::-ms-input-placeholder {
+  color: var(--clr-input);
+}
+
 input#todo::placeholder {
   color: var(--clr-input);
 }
+
 li.todo-li {
+  cursor: -webkit-grabbing;
   cursor: grabbing;
   border-bottom: 1px solid var(--border-check);
 }
+
 li.todo-li:first-child {
   border-top-left-radius: 0.2rem;
   border-top-right-radius: 0.2rem;
 }
+
 li.todo-li p {
   color: var(--clr-todo);
   padding: 1rem 0;
 }
+
 li.todo-li.checked p {
   text-decoration: line-through;
   color: var(--clr-striked);
 }
+
 li.todo-li.checked button.check {
   background: var(--bg-check);
 }
+
 li.todo-li button.check svg {
   visibility: hidden;
   opacity: 0;
 }
+
 li.todo-li.checked button.check svg {
   visibility: visible;
   opacity: 1;
 }
+
 form::before,
 button.check,
 button.delete {
@@ -160,6 +205,7 @@ button.check {
   border: 1px solid var(--border-check);
   border-radius: 50%;
 }
+
 button.delete {
   position: absolute;
   content: '';
@@ -171,9 +217,11 @@ button.delete {
   background: transparent;
   outline: none;
 }
+
 button.delete:hover svg path {
   fill: var(--clr-fill);
 }
+
 button.check,
 button.delete,
 .clear,
@@ -182,56 +230,72 @@ li.todo-li::after,
 .todo-classify p {
   cursor: pointer;
 }
+
 button.check svg,
 button.delete svg {
   pointer-events: none;
 }
+
 div.todo-info {
   position: relative;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   color: var(--clr-input);
   font-size: 0.875rem;
   min-height: 2.5rem;
   padding: 0 2rem;
   border-radius: 0 0 0.2rem 0.2rem;
 }
+
 .todo-classify {
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   background: var(--bg-input);
 }
+
 .todo-classify p {
   font-weight: 700;
 }
+
 .todo-classify p:not(.active):hover,
 .clear p:hover {
   color: var(--clr-hover);
 }
+
 .todo-classify p.active {
   color: var(--clr-primary);
 }
+
 .todo-classify p + p {
   margin-left: 1em;
 }
+
 p.draganddrop {
   margin: 5.25rem 0 2rem 0;
   text-align: center;
   font-size: 0.85em;
   color: var(--clr-input);
 }
+
 footer {
   position: absolute;
   bottom: 0;
   left: 0.5rem;
   margin-bottom: 0.5rem;
 }
+
 .attribution {
   font-size: 11px;
   text-align: center;
   color: var(--clr-input);
 }
+
 .attribution a {
-  color: hsl(228, 45%, 44%);
+  color: #3e52a3;
 }
+
 @media (max-width: 568px) {
   .todo-classify {
     position: absolute;
@@ -242,12 +306,13 @@ footer {
     border-radius: 0.2rem;
   }
 }
+
 @media (min-width: 569px) {
   .light {
-    --bg-url: url('./images/bg-desktop-light.jpg');
+    --bg-url: url('../images/bg-desktop-light.jpg');
   }
   .dark {
-    --bg-url: url('./images/bg-desktop-dark.jpg');
+    --bg-url: url('../images/bg-desktop-dark.jpg');
   }
   .container {
     width: 40%;

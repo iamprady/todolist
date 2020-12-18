@@ -48,11 +48,6 @@ window.addEventListener('DOMContentLoaded', () => {
     itemsLeft === 1 ? ' item' : ' items'
   } left`
 })
-window.addEventListener('resize', () => {
-  document
-    .querySelector(':root')
-    .style.setProperty('--vh', window.innerHeight / 100 + 'px')
-})
 themeChanger.addEventListener('click', () => {
   theme = theme === 'dark' ? 'light' : 'dark'
   setTheme()
@@ -222,6 +217,19 @@ function addListeners(element) {
   element.addEventListener('click', changeStateOfTodo)
   element.addEventListener('dragstart', () => {
     element.classList.add('dragging')
+  })
+  element.addEventListener('touchstart', () => {
+    let dragEvent = new DragEvent('dragstart')
+    element.dispatchEvent(dragEvent)
+  })
+  element.addEventListener('touchmove', (e) => {
+    const touchInfo = e.targetTouches[0]
+    let dragEvent = new DragEvent('dragover', { clientY: touchInfo.clientY })
+    todoList.dispatchEvent(dragEvent)
+  })
+  element.addEventListener('touchend', () => {
+    let dragEvent = new DragEvent('dragend')
+    element.dispatchEvent(dragEvent)
   })
   element.addEventListener('dragend', () => {
     const id = element.getAttribute('id')
