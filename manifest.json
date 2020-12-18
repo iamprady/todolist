@@ -1,8 +1,7 @@
 {
   "name": "makeTodos",
   "short_name": "makeTodos",
-  "start_url": "/index.html",
-  "scope": ".",
+  "start_url": "/",
   "icons": [
     {
       "src": "icons/manifest-icon-192.png",
