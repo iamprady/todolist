@@ -3,3 +3,5 @@
 *.xd
 .DS_Store
 .prettierignore
+debug.log
+*.log
